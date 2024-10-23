@@ -19,7 +19,7 @@ app.use(errorHandler);
 // ERROR handling middleware
 app.use(errorHandler);
 
-
+app.set('view engine', 'hbs');
 
 
 //ROUTES BELOW
