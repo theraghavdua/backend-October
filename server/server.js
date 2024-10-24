@@ -5,6 +5,9 @@ const errorHandler = require("./middlewares/errorHandler");
 const cors = require("cors");
 const hbs = require("hbs");
 const path = require("path");
+const asyncHandler = require('express-async-handler');
+const bcrypt = require('bcrypt');
+
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -17,6 +20,9 @@ app.use(express.json());
 app.use(cors());
 
 app.use(errorHandler);
+
+app.use('/api/register', require("./routes/userRoutes"));
+
 
 // ERROR handling middleware
 app.use(errorHandler);
