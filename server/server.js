@@ -122,22 +122,56 @@ const storage = multer.diskStorage({
 //     });
 //   });
 
+let  imageUrls = [];
+// app.post("/profile", upload.single("avatar"), async (req, res, next) => {
+//     console.log(req.body); // Log the uploaded fields (if any)
+//     console.log(req.file); // Log the uploaded file object
 
-app.post("/profile", upload.single("avatar"), async (req, res, next) => {
-    console.log(req.body); // Log the uploaded fields (if any)
-    console.log(req.file); // Log the uploaded file object
+//     try {
+//         // Save the uploaded image path to the database (Profie model)
+//         const newProfile = new Profile({ image: req.file.filename });
+//         await newProfile.save();
 
-    try {
-        // Save the uploaded image path to the database (Profie model)
-        const newProfile = new Profile({ image: req.file.path });
-        await newProfile.save();
+//         // Redirect or render the profile view with the uploaded image
+//         res.render("allImages", { imageUrls: imageUrls });
+//     } catch (err) {
+//         console.error("Error saving profile:", err);
+//         next(err);
+//     }
+// });
 
-        // Redirect or render the profile view with the uploaded image
-        res.render("profile", { image: req.file.path });
-    } catch (err) {
-        console.error("Error saving profile:", err);
-        next(err);
+
+// app.get("/allimages", async (req, res) => {
+//     try {
+//         // Fetch all profiles with image paths from the database
+//         const profiles = await Profile.find();
+//         const imageUrls = [];
+        
+//         res.render("images", { imageUrls: imageUrls });
+//     } catch (err) {
+//         console.error("Error fetching images:", err);
+//         next(err);
+//     }
+// });
+
+app.post("/profile", upload.single("avatar"), function(req, res, next) {
+    if (!req.file) {
+        return res.status(400).send("No file uploaded.");
     }
+    console.log(req.body);
+    console.log(req.file);
+
+    const fileName = req.file.filename;
+    const imageUrl = `/uploads/${fileName}`;
+    imageUrls.push(imageUrl);
+    return res.render("allimages", {
+        imageUrls: imageUrls
+    });
+});
+
+app.get("/allimages", (req, res) => {
+    const imageUrls = []; 
+    res.render("images", { imageUrls: imageUrls }); 
 });
 
 
