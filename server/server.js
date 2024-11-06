@@ -89,7 +89,7 @@ const storage = multer.diskStorage({
   
   const upload = multer({ storage: storage })
 
-
+  let  imageUrls = [];
 // app.post('/profile', upload.single('avatar'), function (req, res, next) {
 //     console.log(req.body);
 //     console.log(req.file);
@@ -121,8 +121,6 @@ const storage = multer.diskStorage({
 //       image: null // Render profile without any image initially
 //     });
 //   });
-
-let  imageUrls = [];
 // app.post("/profile", upload.single("avatar"), async (req, res, next) => {
 //     console.log(req.body); // Log the uploaded fields (if any)
 //     console.log(req.file); // Log the uploaded file object
