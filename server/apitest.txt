@@ -37,7 +37,7 @@ Expected Response (if the doctor is found):
 }
 
 DELETE: Delete Doctor by Email
-URL: http://localhost:5000/api/doctors/delete/copyOFjohndoe@example.com
+URL: http://localhost:3000/api/doctors/delete/copyOFjohndoe@example.com
 Method: DELETE
 Expected Response (if the doctor is successfully deleted):
 {
@@ -45,3 +45,7 @@ Expected Response (if the doctor is successfully deleted):
 }
 
 
+app.post('/photos/upload', upload.array('photos', 12), function (req, res, next) {
+  // req.files is array of `photos` files
+  // req.body will contain the text fields, if there were any
+})
